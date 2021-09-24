@@ -1,11 +1,11 @@
-import Coin from "./Coin";
+import Coin from "../Coin";
 import User from "./User";
 
 export default class Customer extends User {
   private _money: Coin;
 
-  constructor() {
-    super();
+  constructor(firstname: string, lastname: string) {
+    super(firstname, lastname);
     this._money = new Coin();
   }
 
@@ -18,7 +18,9 @@ export default class Customer extends User {
 
   pay(price: number): boolean {
     if (this._money.value >= price) {
-      this._money.value -= price;
+      this._money.value = this._money.value - price;
+      console.log(`Customer has spent ${price}€`);
+      console.log(`Now, Customer has ${this._money.value}€`);
       return true;
     } else {
       return false;

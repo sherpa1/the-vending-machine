@@ -1,5 +1,5 @@
-import Beverage from "./Beverage";
-import VendingMachine from "./VendingMachine";
+import Beverage from "../beverages/Beverage";
+import VendingMachine from "../VendingMachine";
 
 export default class MaintenanceTechnician {
   private _firstname: string;
