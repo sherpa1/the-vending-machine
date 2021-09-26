@@ -9,10 +9,14 @@ export default abstract class SugarBeverage extends Beverage {
     return this._sugar;
   }
   protected set sugar(value: number) {
+    if (value === undefined) throw new Error(`value must be defined`);
+
     this._sugar = value;
   }
 
   add_sugar(quantity: number) {
+    if (quantity === undefined) throw new Error(`quantity must be defined`);
+
     if (this._sugar + quantity <= SugarBeverage.MAX_SUGAR)
       this._sugar += quantity;
     else
@@ -26,6 +30,7 @@ export default abstract class SugarBeverage extends Beverage {
   }
 
   remove_sugar(quantity: number) {
+    if (quantity === undefined) throw new Error(`quantity must be defined`);
     if (this._sugar - quantity >= 0) this._sugar -= quantity;
     else
       throw new Error(

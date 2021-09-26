@@ -6,9 +6,14 @@ export default class MaintenanceTechnician {
   private _lastname: string;
 
   constructor(firstname: string, lastname: string) {
-    if (firstname === "" || lastname === "")
+    if (
+      firstname === "" ||
+      lastname === "" ||
+      firstname === undefined ||
+      lastname === undefined
+    )
       throw new Error(
-        "Maintenance Technician firstname and lastname must not be empty"
+        `Maintenance Technician firstname and lastname must be defined and not empty`
       );
 
     this._firstname = firstname;
@@ -16,6 +21,16 @@ export default class MaintenanceTechnician {
   }
 
   add(vending_machine: VendingMachine, what: string, quantity: number): void {
+    if (vending_machine === undefined) {
+      throw new Error(`Vending machine must be defined`);
+    }
+    if (what === undefined || what === "") {
+      throw new Error(`what must be defined`);
+    }
+    if (quantity === undefined) {
+      throw new Error(`Quantity must be defined`);
+    }
+
     switch (what) {
       case "water":
         vending_machine.maintain(what, quantity);
@@ -29,6 +44,14 @@ export default class MaintenanceTechnician {
   }
 
   stock(vending_machine: VendingMachine, beverages: Beverage[]) {
+    if (vending_machine === undefined) {
+      throw new Error(`Vending machine must be defined`);
+    }
+
+    if (beverages === undefined || beverages.length === 0) {
+      throw new Error(`Beverages must be defined and not empty`);
+    }
+
     vending_machine.stock(beverages);
   }
 
@@ -37,6 +60,9 @@ export default class MaintenanceTechnician {
   }
 
   public set lastname(value: string) {
+    if (value === "") {
+      throw new Error(`Value must be defined`);
+    }
     this._lastname = value;
   }
 }

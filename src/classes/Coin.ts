@@ -1,12 +1,17 @@
 import Money from "./Money";
 
 export default class Coin extends Money {
-  protected _value: number;
+  public static AUTHORIZED_VALUES: Array<number> = [1, 0.5, 0.2, 0.1];
 
-  public get value(): number {
-    return this._value;
-  }
-  public set value(value: number) {
-    this._value = value;
+  constructor(val: number) {
+    if (val === undefined || val <= 0) {
+      throw new Error(`val must be defined and greater than 0`);
+    }
+
+    if (Coin.AUTHORIZED_VALUES.indexOf(val) === -1)
+      throw new Error(
+        `Authorized values : ${Coin.AUTHORIZED_VALUES.toString()}`
+      );
+    else super(val);
   }
 }
