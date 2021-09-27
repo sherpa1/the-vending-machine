@@ -1,4 +1,4 @@
-import Money from "../Money";
+import Money from "../stockables/Money";
 
 export default abstract class User {
   protected _firstname: string;
@@ -35,29 +35,12 @@ export default abstract class User {
     this._money_items.push(money);
   }
 
-  public remove_money_item(money: Money): boolean {
+  public remove_money_item(money: Money) {
     if (money === undefined) throw new Error(`money must be defined`);
 
-    // for (let i = 0; i < this._money_items.length; i++) {
-    //   const money: Money = this._money_items[i];
-
-    //   if (money.value === money.value) {
-    //     this._money_items.splice(i, 1);
-    //     return true;
-    //   }
-    // }
-
-    const found = this._money_items.find(
-      (element) => element.value === money.value
+    this._money_items = this._money_items.filter(
+      (item) => item.value === money.value
     );
-
-    console.log(found);
-
-    // if (found) {
-    //   this._money_items.splice(i, 1);
-    //   return true;
-    // }
-    return false;
   }
 
   public get budget() {

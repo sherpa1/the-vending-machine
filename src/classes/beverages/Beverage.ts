@@ -1,5 +1,7 @@
-export default abstract class Beverage {
-  protected name: string;
+import IStockable from "../interfaces/IStockable";
+
+export default abstract class Beverage implements IStockable {
+  protected _name: string;
   protected _volume: number;
   protected _price: number;
   private _water: number = 0;
@@ -14,9 +16,17 @@ export default abstract class Beverage {
     if (price === undefined || price <= 0)
       throw new Error(`price must be defined and greater than 0`);
 
-    this.name = name;
+    this._name = name;
     this._water = water;
     this._price = price;
+  }
+
+  name(): string {
+    return this._name;
+  }
+
+  max_quantity(): number {
+    return 0;
   }
 
   protected get volume(): number {

@@ -1,5 +1,5 @@
 import User from "./User";
-import Money from "../Money";
+import Money from "../stockables/Money";
 
 export default class Customer extends User {
   constructor(

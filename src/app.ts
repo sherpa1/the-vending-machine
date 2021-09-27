@@ -2,7 +2,7 @@ import VendingMachine from "./classes/VendingMachine";
 import Customer from "./classes/users/Customer";
 import Coffee from "./classes/beverages/Coffee";
 import MaintenanceTechnician from "./classes/users/MaintenanceTechnician";
-import Coin from "./classes/Coin";
+import Coin from "./classes/stockables/Coin";
 
 const maintenance_technician = new MaintenanceTechnician("Richard", "Roe");
 
@@ -21,6 +21,7 @@ maintenance_technician.stock(vending_machine, [espresso]);
 
 let coffee: Coffee = vending_machine.select(0) as Coffee;
 console.log(coffee);
+
 coffee.add_sugar(1);
 
 console.log(`John Doe get ${john_doe.budget}€`);

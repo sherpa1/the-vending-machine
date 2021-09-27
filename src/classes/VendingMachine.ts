@@ -1,18 +1,25 @@
 import User from "./users/User";
 import Beverage from "./beverages/Beverage";
-import Coin from "./Coin";
+import Coin from "./stockables/Coin";
+import Stock from "./Stock";
+import IStockable from "./interfaces/IStockable";
 
 export default class VendingMachine {
-  private _beverages: Array<Beverage> = [];
+  private _beverages: Stock<Beverage>;
   private _water: number = 0;
   private _cups: number = 0;
-  private _coins: Array<Coin> = [];
+  private _coins: Stock<Coin>;
 
   static readonly MAX_WATER = 5;
   static readonly MAX_BEVERAGES = 30;
 
   static readonly WATER = "water";
   static readonly COINS = "coins";
+
+  constructor() {
+    this._beverages = new Stock();
+    this._coins = new Stock();
+  }
 
   maintain(what: string, quantity: number): void {
     if (what === undefined || what === "") {
@@ -32,28 +39,30 @@ export default class VendingMachine {
     }
   }
 
-  stock(new_beverages: Beverage[]): void {
-    if (new_beverages === undefined || new_beverages.length === 0) {
+  stock(...new_beverages: [IStockable]): void {
+    if (new_beverages === undefined) {
       throw new Error(`beverage must be defined and greater than 0`);
     }
 
     if (
-      this._beverages.length + new_beverages.length <=
+      this._beverages.length() + new_beverages.length <=
       VendingMachine.MAX_BEVERAGES
     ) {
-      this._beverages = this._beverages.concat(new_beverages);
+      new_beverages.forEach((element) => {
+        this._beverages.add(element);
+      });
       console.log(
-        `Now, Vending machine has ${this.beverages.length} beverage(s) in stock`
+        `Now, Vending machine has ${this.beverages.length()} beverage(s) in stock`
       );
     } else
       throw new Error(`Max beverages stock is ${VendingMachine.MAX_BEVERAGES}`);
   }
 
-  select(index: number): Beverage {
+  select(index: number): IStockable {
     if (index === undefined || index < 0)
       throw new Error(`index must defined and greater or equal to 0`);
-    if (index > this._beverages.length - 1) return;
-    return this._beverages[index];
+    if (index > this._beverages.length() - 1) return;
+    return this._beverages.getAt(index);
   }
 
   order(beverage: Beverage, user: User): boolean {
@@ -73,7 +82,7 @@ export default class VendingMachine {
     }
   }
 
-  public get beverages(): Array<Beverage> {
+  public get beverages(): Stock<Beverage> {
     return this._beverages;
   }
 
@@ -85,7 +94,7 @@ export default class VendingMachine {
     return this._cups;
   }
 
-  public get coins(): Array<Coin> {
+  public get coins(): Stock<Coin> {
     return this._coins;
   }
 }
