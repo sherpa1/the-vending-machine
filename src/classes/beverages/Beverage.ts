@@ -1,6 +1,6 @@
-import IStockable from "../interfaces/IStockable";
-
-export default abstract class Beverage implements IStockable {
+export default abstract class Beverage {
+  protected _limit: number;
+  protected _value: number;
   protected _name: string;
   protected _volume: number;
   protected _price: number;
@@ -21,12 +21,16 @@ export default abstract class Beverage implements IStockable {
     this._price = price;
   }
 
-  name(): string {
+  get name(): string {
     return this._name;
   }
 
-  max_quantity(): number {
-    return 0;
+  get limit(): number {
+    return this._limit;
+  }
+
+  get value(): number {
+    return this._value;
   }
 
   protected get volume(): number {

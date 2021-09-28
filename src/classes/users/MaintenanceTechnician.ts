@@ -1,5 +1,4 @@
 import Beverage from "../beverages/Beverage";
-import IStockable from "../interfaces/IStockable";
 import VendingMachine from "../VendingMachine";
 
 export default class MaintenanceTechnician {
@@ -34,7 +33,7 @@ export default class MaintenanceTechnician {
 
     switch (what) {
       case "water":
-        vending_machine.maintain(what, quantity);
+        vending_machine.water = quantity;
         console.log(`Maintenance Technician: adds ${what}`);
         break;
 
@@ -44,7 +43,7 @@ export default class MaintenanceTechnician {
     }
   }
 
-  stock(vending_machine: VendingMachine, ...beverages: IStockable[]) {
+  stock(vending_machine: VendingMachine, ...beverages: Beverage[]) {
     if (vending_machine === undefined) {
       throw new Error(`Vending machine must be defined`);
     }
@@ -53,7 +52,7 @@ export default class MaintenanceTechnician {
       throw new Error(`Beverages must be defined and not empty`);
     }
 
-    beverages.forEach((element) => vending_machine.stock(element));
+    beverages.forEach((element) => (vending_machine.water += element.water));
   }
 
   public get firstname(): string {

@@ -1,7 +1,3 @@
-import SugarBeverage from "./SugarBeverage";
+import BeverageWithSugar from "./BeverageWithSugar";
 
-export default class Tea extends SugarBeverage {
-  name(): string {
-    return "Soup";
-  }
-}
+export default class Tea extends BeverageWithSugar {}

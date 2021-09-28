@@ -1,4 +1,4 @@
-import Money from "../stockables/Money";
+import Money from "../Money";
 
 export default abstract class User {
   protected _firstname: string;
@@ -44,12 +44,15 @@ export default abstract class User {
   }
 
   public get budget() {
-    const reducer = (prev, current) => prev.value + current.value;
+    let sum = 0;
 
     if (this._money_items.length > 0) {
-      const money_sum = this._money_items.reduce(reducer);
-      return money_sum.value;
-    } else return 0;
+      for (const a_money_item of this._money_items) {
+        sum += a_money_item.value;
+      }
+    }
+
+    return sum;
   }
 
   abstract pay(price: number);
