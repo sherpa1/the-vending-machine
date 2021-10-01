@@ -31,6 +31,6 @@ export default class Coffee extends BeverageWithSugar {
     )
       water = 2;
 
-    super(name, price, 1);
+    super(name, price, water);
   }
 }

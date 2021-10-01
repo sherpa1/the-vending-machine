@@ -1,6 +1,7 @@
 import User from "./users/User";
 import Beverage from "./beverages/Beverage";
-import Resource from "./Resource";
+import ResourceFactory from "./resources/ResourceFactory";
+import Resource from "./resources/Resource";
 import Coin from "./Coin";
 import MaintenanceTechnician from "./users/MaintenanceTechnician";
 import Order from "./Order";
@@ -42,19 +43,19 @@ export default class VendingMachine {
   ) {
     for (const resource of resources) {
       switch (resource.name) {
-        case Resource.SUGAR:
+        case ResourceFactory.SUGAR:
           this._sugar += resource.quantity;
           console.log(
             `Vending Machine : contains ${this._sugar} unity of ${resource.name} (added by maintenance technician ${maintenance_technician.firstname} ${maintenance_technician.lastname})`
           );
           break;
-        case Resource.WATER:
+        case ResourceFactory.WATER:
           this._water += resource.quantity;
           console.log(
             `Vending Machine : contains ${this._water} unity of ${resource.name} (added by maintenance technician ${maintenance_technician.firstname} ${maintenance_technician.lastname})`
           );
           break;
-        case Resource.CUPS:
+        case ResourceFactory.CUP:
           this._cups += resource.quantity;
           console.log(
             `Vending Machine : contains ${this._cups} unity of ${resource.name} (added by maintenance technician ${maintenance_technician.firstname} ${maintenance_technician.lastname})`

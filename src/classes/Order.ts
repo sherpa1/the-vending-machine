@@ -1,6 +1,6 @@
 import Beverage from "./beverages/Beverage";
-import Resource from "./Resource";
-import ResourceFactory from "./ResourceFactory";
+import Resource from "./resources/Resource";
+import ResourceFactory from "./resources/ResourceFactory";
 import User from "./users/User";
 
 export default class Order {
@@ -25,12 +25,12 @@ export default class Order {
     this._beverage = beverage_arg;
 
     if (sugar_arg === undefined)
-      this._sugar = ResourceFactory.make(Resource.SUGAR, 0);
+      this._sugar = ResourceFactory.make(ResourceFactory.SUGAR, 0);
     //by default, no sugar
     else this._sugar = sugar_arg;
 
     if (salt_arg === undefined)
-      this._salt = ResourceFactory.make(Resource.SALT, 0);
+      this._salt = ResourceFactory.make(ResourceFactory.SALT, 0);
     //by default, no salt
     else this._salt = salt_arg;
 
