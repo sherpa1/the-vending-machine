@@ -1,8 +1,7 @@
 import Money from "../Money";
+import People from "../People";
 
-export default abstract class User {
-  protected _firstname: string;
-  protected _lastname: string;
+export default abstract class User extends People {
   protected _money_items: Array<Money>;
 
   constructor(
@@ -10,18 +9,7 @@ export default abstract class User {
     lastname: string,
     money_items: Array<Money> = []
   ) {
-    if (
-      firstname === "" ||
-      lastname === "" ||
-      firstname === undefined ||
-      lastname === undefined
-    )
-      throw new Error(
-        `User firstname and lastname must be defined and not empty`
-      );
-
-    this._firstname = firstname;
-    this._lastname = lastname;
+    super(firstname, lastname, 0);
     this._money_items = money_items;
   }
 
@@ -29,14 +17,18 @@ export default abstract class User {
     return this._money_items;
   }
 
-  public add_money_item(money: Money): void {
-    if (money === undefined) throw new Error(`money must be defined`);
+  public add_money_item(...money: Array<Money>): void {
+    if (money === undefined) throw new Error(`money argument must be defined`);
 
-    this._money_items.push(money);
+    for (const m of money) {
+      this._money_items.push(m);
+    }
+
+    console.log(`User : budget is ${this.budget}€`);
   }
 
   public remove_money_item(money: Money) {
-    if (money === undefined) throw new Error(`money must be defined`);
+    if (money === undefined) throw new Error(`money argument must be defined`);
 
     this._money_items = this._money_items.filter(
       (item) => item.value === money.value
