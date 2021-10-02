@@ -2,6 +2,8 @@ import Beverage from "./beverages/Beverage";
 import Resource from "./resources/Resource";
 import ResourceFactory from "./resources/ResourceFactory";
 import User from "./users/User";
+import BeverageWithSugar from "./beverages/BeverageWithSugar";
+import BeverageWithSalt from "./beverages/BeverageWithSalt";
 
 export default class Order {
   private _beverage: Beverage;
@@ -29,10 +31,16 @@ export default class Order {
     //by default, no sugar
     else this._sugar = sugar_arg;
 
+    if (this._beverage instanceof BeverageWithSalt)
+      this._sugar = ResourceFactory.make(ResourceFactory.SUGAR, 0); //sugar is not compatible with BeverageWithSalt
+
     if (salt_arg === undefined)
       this._salt = ResourceFactory.make(ResourceFactory.SALT, 0);
     //by default, no salt
     else this._salt = salt_arg;
+
+    if (this._beverage instanceof BeverageWithSugar)
+      this._salt = ResourceFactory.make(ResourceFactory.SALT, 0); //salt is not compatible with BeverageWithSugar
 
     if (with_cup_arg === undefined) this._with_cup = true;
     else this._with_cup = with_cup_arg;
