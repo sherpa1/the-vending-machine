@@ -8,13 +8,13 @@ export default abstract class BeverageWithSugar extends Beverage {
   protected get sugar(): number {
     return this._sugar;
   }
-  protected set sugar(quantity: number) {
-    if (quantity === undefined) throw new Error(`quantity arg must be defined`);
+  protected set sugar(value: number) {
+    if (value === undefined) throw new Error(`value arg must be defined`);
 
-    if (quantity <= BeverageWithSugar.MAX_SUGAR) this._sugar = quantity;
+    if (value <= BeverageWithSugar.MAX_SUGAR) this._sugar = value;
     else
       throw new Error(
-        `Max sugar's level accepted is ${BeverageWithSugar.MAX_SUGAR} --> ${quantity} given.`
+        `Max sugar's level accepted is ${BeverageWithSugar.MAX_SUGAR} --> ${value} given.`
       );
 
     console.log(
@@ -22,14 +22,14 @@ export default abstract class BeverageWithSugar extends Beverage {
     );
   }
 
-  add_sugar(quantity: number) {
-    if (quantity === undefined) throw new Error(`quantity must be defined`);
+  add_sugar(value: number) {
+    if (value === undefined) throw new Error(`value must be defined`);
 
-    if (this._sugar + quantity <= BeverageWithSugar.MAX_SUGAR)
-      this._sugar += quantity;
+    if (this._sugar + value <= BeverageWithSugar.MAX_SUGAR)
+      this._sugar += value;
     else
       throw new Error(
-        `Max sugar's level accepted is ${BeverageWithSugar.MAX_SUGAR} --> ${quantity} given.`
+        `Max sugar's level accepted is ${BeverageWithSugar.MAX_SUGAR} --> ${value} given.`
       );
 
     console.log(
@@ -37,12 +37,12 @@ export default abstract class BeverageWithSugar extends Beverage {
     );
   }
 
-  remove_sugar(quantity: number) {
-    if (quantity === undefined) throw new Error(`quantity must be defined`);
-    if (this._sugar - quantity >= 0) this._sugar -= quantity;
+  remove_sugar(value: number) {
+    if (value === undefined) throw new Error(`value must be defined`);
+    if (this._sugar - value >= 0) this._sugar -= value;
     else
       throw new Error(
-        `Minimum sugar's level : 0/${BeverageWithSugar.MAX_SUGAR} --> ${quantity} given.`
+        `Minimum sugar's level : 0/${BeverageWithSugar.MAX_SUGAR} --> ${value} given.`
       );
   }
 }

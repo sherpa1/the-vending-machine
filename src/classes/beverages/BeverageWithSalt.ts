@@ -8,13 +8,13 @@ export default abstract class BeverageWithSalt extends Beverage {
   protected get salt(): number {
     return this._salt;
   }
-  protected set salt(quantity: number) {
-    if (quantity === undefined) throw new Error(`quantity arg must be defined`);
+  protected set salt(value: number) {
+    if (value === undefined) throw new Error(`value arg must be defined`);
 
-    if (quantity <= BeverageWithSalt.MAX_SALT) this._salt = quantity;
+    if (value <= BeverageWithSalt.MAX_SALT) this._salt = value;
     else
       throw new Error(
-        `Max salt's level accepted is ${BeverageWithSalt.MAX_SALT} --> ${quantity} given.`
+        `Max salt's level accepted is ${BeverageWithSalt.MAX_SALT} --> ${value} given.`
       );
 
     console.log(
@@ -22,14 +22,13 @@ export default abstract class BeverageWithSalt extends Beverage {
     );
   }
 
-  add_salt(quantity: number) {
-    if (quantity === undefined) throw new Error(`quantity must be defined`);
+  add_salt(value: number) {
+    if (value === undefined) throw new Error(`value arg must be defined`);
 
-    if (this._salt + quantity <= BeverageWithSalt.MAX_SALT)
-      this._salt += quantity;
+    if (this._salt + value <= BeverageWithSalt.MAX_SALT) this._salt += value;
     else
       throw new Error(
-        `Max salt's level accepted is ${BeverageWithSalt.MAX_SALT} --> ${quantity} given.`
+        `Max salt's level accepted is ${BeverageWithSalt.MAX_SALT} --> ${value} given.`
       );
 
     console.log(
@@ -37,12 +36,12 @@ export default abstract class BeverageWithSalt extends Beverage {
     );
   }
 
-  remove_salt(quantity: number) {
-    if (quantity === undefined) throw new Error(`quantity must be defined`);
-    if (this._salt - quantity >= 0) this._salt -= quantity;
+  remove_salt(value: number) {
+    if (value === undefined) throw new Error(`value arg must be defined`);
+    if (this._salt - value >= 0) this._salt -= value;
     else
       throw new Error(
-        `Minimum salt's level : 0/${BeverageWithSalt.MAX_SALT} --> ${quantity} given.`
+        `Minimum salt's level : 0/${BeverageWithSalt.MAX_SALT} --> ${value} given.`
       );
   }
 }
