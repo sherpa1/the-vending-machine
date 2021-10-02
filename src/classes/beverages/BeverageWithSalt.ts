@@ -8,10 +8,18 @@ export default abstract class BeverageWithSalt extends Beverage {
   protected get salt(): number {
     return this._salt;
   }
-  protected set salt(value: number) {
-    if (value === undefined) throw new Error(`value must be defined`);
+  protected set salt(quantity: number) {
+    if (quantity === undefined) throw new Error(`quantity arg must be defined`);
 
-    this._salt = value;
+    if (quantity <= BeverageWithSalt.MAX_SALT) this._salt = quantity;
+    else
+      throw new Error(
+        `Max salt's level accepted is ${BeverageWithSalt.MAX_SALT} --> ${quantity} given.`
+      );
+
+    console.log(
+      `Now, salt's level is : ${this._salt}/${BeverageWithSalt.MAX_SALT}`
+    );
   }
 
   add_salt(quantity: number) {

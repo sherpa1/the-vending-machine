@@ -27,16 +27,16 @@ export default class Order {
     this._beverage = beverage_arg;
 
     if (sugar_arg === undefined)
+      //by default, no sugar
       this._sugar = ResourceFactory.make(ResourceFactory.SUGAR, 0);
-    //by default, no sugar
     else this._sugar = sugar_arg;
 
     if (this._beverage instanceof BeverageWithSalt)
       this._sugar = ResourceFactory.make(ResourceFactory.SUGAR, 0); //sugar is not compatible with BeverageWithSalt
 
     if (salt_arg === undefined)
+      //by default, no salt
       this._salt = ResourceFactory.make(ResourceFactory.SALT, 0);
-    //by default, no salt
     else this._salt = salt_arg;
 
     if (this._beverage instanceof BeverageWithSugar)
