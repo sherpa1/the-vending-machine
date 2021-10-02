@@ -30,16 +30,16 @@ export default abstract class Beverage {
     return this._value;
   }
 
-  public get price(): number {
+  get price(): number {
     return this._price;
   }
 
-  public set price(value: number) {
+  set price(value: number) {
     if (value === undefined) throw new Error(`value must be defined`);
     this._price = value;
   }
 
-  public get water(): number {
+  get water(): number {
     return this._water;
   }
 }
