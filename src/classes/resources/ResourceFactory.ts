@@ -2,18 +2,21 @@ import Water from "./Water";
 import Cup from "./Cup";
 import Salt from "./Salt";
 import Sugar from "./Sugar";
+import Milk from "./Milk";
 
 export default abstract class ResourceFactory {
   static readonly WATER: string = "water";
   static readonly CUP: string = "cup";
   static readonly SALT: string = "salt";
   static readonly SUGAR: string = "sugar";
+  static readonly MILK: string = "milk";
 
   static readonly KINDS: Array<string> = [
     ResourceFactory.WATER,
     ResourceFactory.SALT,
     ResourceFactory.CUP,
     ResourceFactory.SUGAR,
+    ResourceFactory.MILK,
   ];
 
   static make(name: string, quantity: number = 10) {
@@ -36,6 +39,8 @@ export default abstract class ResourceFactory {
         return new Sugar(quantity);
       case ResourceFactory.SALT:
         return new Salt(quantity);
+      case ResourceFactory.MILK:
+        return new Milk(quantity);
       default:
         throw new Error(
           `authorized resource names are ${ResourceFactory.KINDS.join(

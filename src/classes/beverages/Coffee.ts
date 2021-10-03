@@ -24,12 +24,20 @@ export default class Coffee extends BeverageWithSugar {
       );
     let price: number = 1;
     let water: number = 1;
+    let milk: number = 0;
 
     if (
       name.toLowerCase() === Coffee.LUNGO ||
       name.toLowerCase() === Coffee.AMERICANO
-    )
+    ) {
       water = 2;
+      price = 2;
+    }
+
+    if (name.toLowerCase() === Coffee.CAPPUCCINO) {
+      price = 2;
+      milk = 1;
+    }
 
     super(name, price, water);
   }

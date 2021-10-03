@@ -8,14 +8,17 @@ import Coin from "./classes/Coin";
 import MaintenanceTechnician from "./classes/users/MaintenanceTechnician";
 import ResourceFactory from "./classes/resources/ResourceFactory";
 import OrderFactory from "./classes/OrderFactory";
+import StaffMember from "./classes/users/StaffMember";
+import Chip from "./classes/Chip";
 
 function init() {
   const john_doe = new Customer("John", "Doe");
-
-  john_doe.add_money_item(new Coin(1), new Coin(2), new Coin(0.5));
-
+  const carla_coe = new StaffMember("Carla", "Coe");
   const maintenance_technician = new MaintenanceTechnician("Richard", "Roe");
   const vending_machine = new VendingMachine();
+
+  john_doe.add_money_item(new Coin(1), new Coin(2), new Coin(0.5));
+  carla_coe.add_money_item(new Chip(), new Chip(), new Chip());
 
   vending_machine.add_beverage(
     maintenance_technician,
@@ -32,19 +35,79 @@ function init() {
     new Soup(Soup.TOMATOES)
   );
 
+  vending_machine.add_coin(
+    new Coin(1),
+    new Coin(1),
+    new Coin(1),
+    new Coin(1),
+    new Coin(1),
+    new Coin(1),
+    new Coin(1),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.5),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.2),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1),
+    new Coin(0.1)
+  );
+
   const water = ResourceFactory.make(ResourceFactory.WATER, 150);
   const cups = ResourceFactory.make(ResourceFactory.CUP, 50);
   const sugar = ResourceFactory.make(ResourceFactory.SUGAR, 150);
+  const milk = ResourceFactory.make(ResourceFactory.MILK, 100);
 
-  vending_machine.add_resource(maintenance_technician, sugar, cups, water);
-
-  const selected_beverage: Beverage = vending_machine.select_beverage(
-    Coffee.ESPRESSO
+  vending_machine.add_resource(
+    maintenance_technician,
+    sugar,
+    cups,
+    water,
+    milk
   );
 
-  const order = OrderFactory.make(john_doe, selected_beverage);
+  const selected_beverage_1: Beverage = vending_machine.select(Coffee.ESPRESSO);
 
-  vending_machine.order_beverage(order);
+  const order_1 = OrderFactory.make(john_doe, selected_beverage_1);
+
+  vending_machine.order(order_1);
+  vending_machine.pay();
+
+  const selected_beverage_2: Beverage = vending_machine.select(
+    Coffee.CAPPUCCINO
+  );
+
+  const order_2 = OrderFactory.make(carla_coe, selected_beverage_2);
+
+  vending_machine.order(order_2);
+  vending_machine.pay();
 }
 
 init();

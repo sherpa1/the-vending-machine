@@ -19,6 +19,7 @@ export default class Customer extends User {
 
         if (index > -1) {
           this._money_items.splice(index, 1);
+          console.log(`Customer : payment done`);
           return true;
         } else {
           console.error(

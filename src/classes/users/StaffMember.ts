@@ -7,6 +7,8 @@ export default class StaffMember extends User {
 
     if (this._money_items.length) {
       this._money_items.splice(0, 1); //remove abitrary 1 chip
+      console.log(`Member Staff : payment done`);
+      return true;
     } else {
       console.log(`Member Staff has no more chip`);
       return false;

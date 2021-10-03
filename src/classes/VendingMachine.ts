@@ -1,4 +1,3 @@
-import User from "./users/User";
 import Beverage from "./beverages/Beverage";
 import ResourceFactory from "./resources/ResourceFactory";
 import Resource from "./resources/Resource";
@@ -11,14 +10,19 @@ export default class VendingMachine {
   private _water: number = 0;
   private _sugar: number = 0;
   private _cups: number = 0;
+  private _milk: number = 0;
   private _coins: Array<Coin> = [];
+  private _current_order: Order = null;
+  private _orders: Array<Order> = [];
 
-  add_coin(coin: Coin): void {
-    if (coin === undefined) {
+  add_coin(...coins: Array<Coin>): void {
+    if (coins === undefined) {
       throw new Error(`coin argument must be defined`);
     }
 
-    this._coins.push(coin);
+    for (const coin of coins) {
+      this._coins.push(coin);
+    }
   }
 
   add_beverage(
@@ -33,7 +37,7 @@ export default class VendingMachine {
       this._beverages.push(beverage);
     });
     console.log(
-      `Vending machine : contains ${this.beverages.length} beverage(s) in stock (added by maintenance technician ${maintenance_technician.firstname} ${maintenance_technician.lastname})`
+      `Vending machine : contains ${this.beverages.length} beverage(s) in stock (added by maintenance technician ${maintenance_technician.fullname})`
     );
   }
 
@@ -46,26 +50,32 @@ export default class VendingMachine {
         case ResourceFactory.SUGAR:
           this._sugar += resource.quantity;
           console.log(
-            `Vending Machine : contains ${this._sugar} unity of ${resource.name} (added by maintenance technician ${maintenance_technician.firstname} ${maintenance_technician.lastname})`
+            `Vending Machine : contains ${this._sugar} unities of ${resource.name} (added by maintenance technician ${maintenance_technician.fullname})`
           );
           break;
         case ResourceFactory.WATER:
           this._water += resource.quantity;
           console.log(
-            `Vending Machine : contains ${this._water} unity of ${resource.name} (added by maintenance technician ${maintenance_technician.firstname} ${maintenance_technician.lastname})`
+            `Vending Machine : contains ${this._water} unities of ${resource.name} (added by maintenance technician ${maintenance_technician.fullname})`
           );
           break;
         case ResourceFactory.CUP:
           this._cups += resource.quantity;
           console.log(
-            `Vending Machine : contains ${this._cups} unity of ${resource.name} (added by maintenance technician ${maintenance_technician.firstname} ${maintenance_technician.lastname})`
+            `Vending Machine : contains ${this._cups} unities of ${resource.name} (added by maintenance technician ${maintenance_technician.fullname})`
+          );
+          break;
+        case ResourceFactory.MILK:
+          this._milk += resource.quantity;
+          console.log(
+            `Vending Machine : contains ${this._milk} unities of ${resource.name} (added by maintenance technician ${maintenance_technician.fullname})`
           );
           break;
       }
     }
   }
 
-  select_beverage(name: string): Beverage {
+  select(name: string): Beverage {
     if (this._coins.length === 0)
       console.warn(`Vending Machine : at the moment, can not give change`);
 
@@ -97,18 +107,45 @@ export default class VendingMachine {
         `Vending Machine : does not contain a beverage of this kind : ${name}`
       );
 
+    console.log(
+      `Vending Machine : ${
+        selected_beverage.name
+      } selected (${selected_beverage.toString()})`
+    );
+
     return selected_beverage;
   }
 
-  order_beverage(order: Order): boolean {
-    if (order.user.pay(order.beverage.price)) {
-      this._water -= order.beverage.water;
-      if (order.with_cup) this._cups -= 1;
-      console.log(
-        `User : bought ${order.beverage.name} at ${order.beverage.price}€`
-      );
+  order(order: Order) {
+    console.log(
+      `Vending Machine : ${order.beverage.name} ordered by ${order.user.fullname}`
+    );
+
+    if (
+      this._current_order !== null &&
+      this._current_order.status === Order.DOING
+    ) {
+      this._current_order.cancel();
+    }
+
+    this._current_order = order;
+    this._orders.push(order); //Vending Machine keeps each order in memory
+  }
+
+  pay(): boolean {
+    if (this._current_order === undefined || this._current_order === null) {
+      throw new Error(`There is no order to pay`);
+    }
+
+    if (this._current_order.user.pay(this._current_order.beverage.price)) {
+      this._water -= this._current_order.beverage.water;
+      if (this._current_order.with_cup) this._cups -= 1;
+
+      this._current_order.validate();
+      this._current_order = null;
       return true;
     } else {
+      this._current_order.cancel();
       return false;
     }
   }

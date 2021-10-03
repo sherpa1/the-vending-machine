@@ -1,11 +1,11 @@
 export default abstract class Beverage {
   protected _limit: number;
-  protected _value: number;
   protected _name: string;
   protected _price: number;
   private _water: number = 0;
+  private _milk: number = 0;
 
-  constructor(name: string, price: number, water: number = 0) {
+  constructor(name: string, price: number, water: number = 0, milk?: number) {
     if (name === undefined || name === "")
       throw new Error(`name must be defined and not empty`);
     if (water === undefined || water <= 0)
@@ -16,6 +16,12 @@ export default abstract class Beverage {
     this._name = name;
     this._water = water;
     this._price = price;
+
+    if (milk !== undefined && milk >= 0) this._milk = milk;
+  }
+
+  toString() {
+    return `name : ${this._name}, water : ${this._water}, milk : ${this._milk}, price : ${this._price}`;
   }
 
   get name(): string {
@@ -24,10 +30,6 @@ export default abstract class Beverage {
 
   get limit(): number {
     return this._limit;
-  }
-
-  get value(): number {
-    return this._value;
   }
 
   get price(): number {
@@ -41,5 +43,9 @@ export default abstract class Beverage {
 
   get water(): number {
     return this._water;
+  }
+
+  get milk(): number {
+    return this._milk;
   }
 }
