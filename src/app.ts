@@ -9,7 +9,7 @@ import MaintenanceTechnician from "./classes/users/MaintenanceTechnician";
 import ResourceFactory from "./classes/resources/ResourceFactory";
 import OrderFactory from "./classes/OrderFactory";
 import StaffMember from "./classes/users/StaffMember";
-import Chip from "./classes/Chip";
+import Token from "./classes/Token";
 
 function init() {
   const john_doe = new Customer("John", "Doe");
@@ -18,7 +18,7 @@ function init() {
   const vending_machine = new VendingMachine();
 
   john_doe.add_money_item(new Coin(1), new Coin(2), new Coin(0.5));
-  carla_coe.add_money_item(new Chip(), new Chip(), new Chip());
+  carla_coe.add_money_item(new Token(), new Token(), new Token());
 
   vending_machine.add_beverage(
     maintenance_technician,
@@ -48,31 +48,12 @@ function init() {
     new Coin(0.5),
     new Coin(0.5),
     new Coin(0.5),
-    new Coin(0.5),
-    new Coin(0.5),
-    new Coin(0.5),
-    new Coin(0.5),
-    new Coin(0.5),
-    new Coin(0.5),
     new Coin(0.2),
     new Coin(0.2),
     new Coin(0.2),
     new Coin(0.2),
     new Coin(0.2),
     new Coin(0.2),
-    new Coin(0.2),
-    new Coin(0.2),
-    new Coin(0.2),
-    new Coin(0.2),
-    new Coin(0.2),
-    new Coin(0.1),
-    new Coin(0.1),
-    new Coin(0.1),
-    new Coin(0.1),
-    new Coin(0.1),
-    new Coin(0.1),
-    new Coin(0.1),
-    new Coin(0.1),
     new Coin(0.1),
     new Coin(0.1),
     new Coin(0.1),
@@ -93,20 +74,22 @@ function init() {
     milk
   );
 
-  const selected_beverage_1: Beverage = vending_machine.select(Coffee.ESPRESSO);
+  const selected_beverage_n1: Beverage = vending_machine.select(
+    Coffee.ESPRESSO
+  );
 
-  const order_1 = OrderFactory.make(john_doe, selected_beverage_1);
+  const order_n1 = OrderFactory.make(john_doe, selected_beverage_n1);
 
-  vending_machine.order(order_1);
+  vending_machine.order(order_n1);
   vending_machine.pay();
 
-  const selected_beverage_2: Beverage = vending_machine.select(
+  const selected_beverage_n2: Beverage = vending_machine.select(
     Coffee.CAPPUCCINO
   );
 
-  const order_2 = OrderFactory.make(carla_coe, selected_beverage_2);
+  const order_n2 = OrderFactory.make(carla_coe, selected_beverage_n2);
 
-  vending_machine.order(order_2);
+  vending_machine.order(order_n2);
   vending_machine.pay();
 }
 
