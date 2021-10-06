@@ -1,24 +1,34 @@
 # The Vending Machine
 
-Implémentation de spécifications fonctionnelles définies à l'aide de méthodes d'analyse / conception logicielle inspirée de la méthodologie Agile eXtreme Programming (XP).
-Programmation Orienté Objet en langage Typescript / Javascript.
-
 ## Sujet
 
-Développement d'un pseudo logiciel de type _"Distributeur automatique"_ à partir d'un exercice de rétro-ingénierie basée sur l'observation de son fonctionnement supposé et de ses interactions _Homme / Machine_ (_Client / Machine et Technicien de maintenance_).
+Conception et implémentation d'un logiciel fictif de _"Distributeur automatique de boissons"_ sur la base d'un travail de rétro-ingénierie (analyse des interactions Homme / Machine, propositions d'amélioration...).
 
 ## Acteurs et interactions Homme / Machine
 
+- Le système correspond au distributeur automatique de boisson (interface et automatismes).
 - L'acteur primaire est le "Client" (sélection, configuration et commande de produit).
 - L'acteur secondaire est le "Technicien de maintenance" (approvisionnement de la machine).
 
-## Installation des dépendances NPM
+## Spécifications techniques
 
-Exécuter cette commande depuis la racine du dossier du projet.
+### Langage de programmation
+
+Programmation Orienté Objet en langage TypeScript / JavaScript.
+
+### Runtime JavaScript
+
+Node.js v.14.17.6 (octobre 2021).
+
+### Installation des dépendances NPM
+
+_Les commandes ci-dessous doivent toutes être exécutées depuis la racine du répertoire du projet_
+
+### Installation des dépendances NPM
 
 `npm install`
 
-Installation globale de Nodemon (Hot Reloading)
+### Installation globale de Nodemon (Hot Reloading)
 
 `npm install -g nodemon`
 
@@ -26,19 +36,25 @@ ou
 
 `sudo npm install -g nodemon` (sur systèmes Unix)
 
-## Lancement du logiciel
+### Exécution du logiciel
 
-Exécuter cette commande depuis la racine du dossier du projet.
+`npm start`
 
-`npm run start`
+### Exécution du logiciel avec activation du Hot Reloading
 
-## Lancement du logiciel avec Hot Reloading
+`npm run dev`
 
-`npm run watch`
+### Emplacement du code JavaScript transpilé
 
-## Consultation du résultat produit par le logiciel
+`./dist`
+
+### Consultation du résultat produit par le logiciel
 
 Pendant son exécution, le logiciel génére des logs directement affiché dans le terminal où il est en cours d'exécution.
+
+### Exécution des tests unitaires avec Jest.js
+
+`npm test`
 
 ---
 

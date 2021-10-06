@@ -1,11 +1,11 @@
 {
   "name": "vending-machine",
   "version": "1.0.0",
-  "description": "OOP Programming good practice",
+  "description": "OOP with Typescript",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
-    "watch": "tsc && nodemon dist/app.js",
+    "start": "NODE_ENV=production tsc && node dist/app.js",
+    "dev": "NODE_ENV=development tsc && nodemon dist/app.js",
     "test": "jest"
   },
   "keywords": [],
