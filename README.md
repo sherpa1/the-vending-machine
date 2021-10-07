@@ -1,5 +1,7 @@
 # The Vending Machine
 
+Bonnes pratiques de Programmation Orientée Objet illustrée avec TypeScript.
+
 ## Sujet
 
 Conception et implémentation d'un logiciel fictif de _"Distributeur automatique de boissons"_ sur la base d'un travail de rétro-ingénierie (analyse des interactions Homme / Machine, propositions d'amélioration...).
@@ -24,11 +26,11 @@ Node.js v.14.17.6 (octobre 2021).
 
 _Les commandes ci-dessous doivent toutes être exécutées depuis la racine du répertoire du projet_
 
-### Installation des dépendances NPM
+### Installation des dépendances NPM (avant la première utilisation)
 
 `npm install`
 
-### Installation globale de Nodemon (Hot Reloading)
+### Installation globale de Nodemon pour le Hot Reloading (avant la première utilisation)
 
 `npm install -g nodemon`
 
@@ -40,7 +42,7 @@ ou
 
 `npm start`
 
-### Exécution du logiciel avec activation du Hot Reloading
+### Exécution du logiciel avec activation du Hot Reloading (nodemon doit être installé)
 
 `npm run dev`
 
