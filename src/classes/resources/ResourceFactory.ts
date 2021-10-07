@@ -33,8 +33,6 @@ export default abstract class ResourceFactory {
         return new Water(quantity);
       case ResourceFactory.CUP:
         return new Cup(quantity);
-      case ResourceFactory.WATER:
-        return new Salt(quantity);
       case ResourceFactory.SUGAR:
         return new Sugar(quantity);
       case ResourceFactory.SALT:

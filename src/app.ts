@@ -12,12 +12,17 @@ import StaffMember from "./classes/users/StaffMember";
 import Token from "./classes/Token";
 
 function init() {
+  //initialization
+
   const john_doe = new Customer("John", "Doe");
   const carla_coe = new StaffMember("Carla", "Coe");
+
   const maintenance_technician = new MaintenanceTechnician("Richard", "Roe");
+
   const vending_machine = new VendingMachine();
 
   john_doe.add_money_item(new Coin(1), new Coin(2), new Coin(0.5));
+
   carla_coe.add_money_item(new Token(), new Token(), new Token());
 
   vending_machine.add_beverage(
@@ -74,6 +79,7 @@ function init() {
     milk
   );
 
+  //start scenario
   const selected_beverage_n1: Beverage = vending_machine.select(
     Coffee.ESPRESSO
   );
