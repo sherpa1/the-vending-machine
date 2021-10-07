@@ -4,8 +4,8 @@
   "description": "OOP good practices with Typescript",
   "main": "dist/app.js",
   "scripts": {
-    "start": "NODE_ENV=production tsc && node dist/app.js",
-    "dev": "NODE_ENV=development tsc && nodemon dist/app.js",
+    "start": "tsc && node dist/app.js",
+    "dev": "tsc && nodemon dist/app.js",
     "test": "jest"
   },
   "keywords": [],
